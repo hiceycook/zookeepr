@@ -1,14 +1,18 @@
+
 const fs = require('fs');
 const path = require('path');
 const express = require("express");
 const PORT = process.env.PORT || 3001;
 const app = express();
 // parse incoming string or array data
+
 app.use(express.urlencoded({ extended: true }));
+
 // parse incoming JSON data
 app.use(express.json());
 const { animals } = require('./data/animals');
-
+//Add front end files to server
+app.use(express.static('public'));
 
 
 
@@ -120,8 +124,24 @@ app.post('/api/animals', (req, res) => {
         res.json(animal);
     }
 });
+//SEND INDEX.HTML TO SERVER ROOT
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+//SEND ANIMALS.HTML TO SERVER /ANIMALS
+app.get('/animals', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/animals.html'));
+})
 
+//SEND ZOOKEEPERS.HTML TO SERVER /ZOOKEEPERS
+app.get('/zookeepers', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+})
 
+//HANDLE WILDCARD ROUTES 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+})
 
 
 
