@@ -137,6 +137,16 @@
         "hungry"
       ],
       "id": "13"
+    },
+    {
+      "name": "Test",
+      "species": "Test",
+      "diet": "herbivore",
+      "personalityTraits": [
+        "zany",
+        "anxious"
+      ],
+      "id": "14"
     }
   ]
 }
